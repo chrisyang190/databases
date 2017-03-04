@@ -60,7 +60,7 @@ module.exports = {
         }
         console.log('FUCK YEAH');
         console.log('Last insert ID:', res.insertId);
-        callback(res);
+        return res;
         // done();
       });
       db.end();

@@ -9,6 +9,8 @@ var headers = { 'access-control-allow-origin': '*',
   'access-control-max-age': 10, // Seconds.
   'contentType': 'text/html'
 };
+
+
 module.exports = {
 
   // headers: { 'access-control-allow-origin': '*',
