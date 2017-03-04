@@ -76,7 +76,7 @@ app.fetch = function() {
     contentType: 'application/json',
     success: function (data) {
       newMessages = [];
-      
+      console.log('fetching');
       // REMEMBER TO PARSE THIS DATA, SINCE IT WAS STRINGIFIED FROM SERVER TO CLIENT!
       (JSON.parse(data)).results.forEach(function(value) {
         newMessages.push(value);
@@ -139,4 +139,3 @@ app.renderMessage = function(message) {
 app.renderRoom = function(roomname) {
   $('#roomSelect').prepend(`<option>${roomname}</option>`);
 };
-

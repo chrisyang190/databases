@@ -30,6 +30,7 @@ module.exports = {
   users: {
     // Ditto as above.
     get: function () {
+      console.log('test');
       db.query('SELECT * FROM users', function(err, rows) {
         if (err) {
           throw err;

@@ -9,5 +9,5 @@ exports.dbConnection = mysql.createConnection({
   database: 'chat'
 });
 
-dbConnection.connect();
+exports.dbConnection.connect();
 
