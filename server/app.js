@@ -22,6 +22,8 @@ app.use(parser.json());
 app.use('/classes', router);
 
 // Serve the client files
+//This is the server running our HTML file.
+//Accesses web page on server instead of by itself
 app.use(express.static(__dirname + '/../client'));
 
 // If we are being run directly, run the server.

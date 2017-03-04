@@ -33,7 +33,7 @@ $(document).ready(function() {
   };
   app.init();
   app.fetch();
-  setInterval(app.fetch.bind(app), 2000);
+  // setInterval(app.fetch.bind(app), 2000);
 });
 
 app.send = function(message) {
@@ -45,6 +45,8 @@ app.send = function(message) {
     contentType: 'application/json',
     success: function (data) {
       console.log('chatterbox: Message sent');
+
+      console.log(data);
     },
     error: function (data) {
       // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error

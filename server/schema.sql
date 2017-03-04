@@ -20,12 +20,12 @@ USE chat;
 
 -- /* Create other tables and define schemas for them here! */
 
-CREATE TABLE rooms (
+-- CREATE TABLE rooms (
 
-  id int NOT NULL AUTO_INCREMENT,
-  name varchar(10) NULL,
-  PRIMARY KEY(id)
-);
+--   id int NOT NULL AUTO_INCREMENT,
+--   name varchar(10) NULL,
+--   PRIMARY KEY(id)
+-- );
 
 CREATE TABLE users (
 
@@ -37,31 +37,28 @@ CREATE TABLE messages (
   /* Describe your table here.*/
   id int NOT NULL AUTO_INCREMENT,
   text varchar(30) NULL,
-  room_id int NOT NULL,
+  room_name varchar(30) NOT NULL,
   user_id int NOT NULL,
 
   PRIMARY KEY(id),
-
-  FOREIGN KEY (room_id)
-    REFERENCES rooms (id),
 
   FOREIGN KEY (user_id)
     REFERENCES users (id)
 );
 
-CREATE TABLE rooms_users (
+-- CREATE TABLE rooms_users (
 
-  id int NOT NULL AUTO_INCREMENT,
-  user_id int NOT NULL,
-  room_id int NOT NULL,
-  PRIMARY KEY(id),
+--   id int NOT NULL AUTO_INCREMENT,
+--   user_id int NOT NULL,
+--   room_id int NOT NULL,
+--   PRIMARY KEY(id),
 
-  FOREIGN KEY (room_id)
-    REFERENCES rooms (id),
+--   FOREIGN KEY (room_id)
+--     REFERENCES rooms (id),
 
-  FOREIGN KEY (user_id)
-    REFERENCES users (id)
-);
+--   FOREIGN KEY (user_id)
+--     REFERENCES users (id)
+-- );
 
 
 /*  Execute this file from the command line by typing:

@@ -10,7 +10,9 @@ var headers = { 'access-control-allow-origin': '*',
   'contentType': 'text/html'
 };
 
+var createResponse = function(statusCode, headers) {
 
+};
 module.exports = {
 
   // headers: { 'access-control-allow-origin': '*',
@@ -25,7 +27,9 @@ module.exports = {
       console.log(req.url);
       // remember = remember || { results: [] };
         // res.writeHead(27000, this.headers);
-      // models.users.get();
+      models.messages.get(function(row) {
+        console.log(row);
+      });
 
       //WHY IS CONTENTTYPE TEXT/HTML AND NOT APPLICATION/JSON
       res.writeHead(200, headers);
@@ -36,6 +40,9 @@ module.exports = {
       // if (req.method === 'POST') {
         // res.writeHead(201, this.headers);
       console.log('posted 1');
+      req.on('data', function(data) {
+        console.log('WUT!');
+      });
       // remember = remember || { results: [] };
       // req.on('data', function(data) {
       //   console.log('data', data);
@@ -43,8 +50,14 @@ module.exports = {
       // });
       // var parsed = JSON.parse(req.body);
       // models.messages.post(parsed);
+      console.log('request body', req.body);
 
-      // models.messages.post(req.body);
+      models.users.post(req.body, function(data) {
+        console.log('WHY IS THIS NOT WORKING');
+      });
+
+      // var parsed = JSON.parse(req.body);
+      // models.users.post(parsed);
 
       res.writeHead(201, headers);
       remember.results.push(req.body);
@@ -61,8 +74,14 @@ module.exports = {
       // remember = remember || { results: [] };
       console.log(req.url);
         // res.writeHead(2770, this.headers);
+
+      models.users.get(function(row) {
+        console.log(row);
+      });
+
       res.writeHead(200, headers);
-      res.end(JSON.stringify(remember));
+      var bleh = models.users.get();
+      res.end(JSON.stringify(bleh));
       // }
     },
     post: function (req, res) {
