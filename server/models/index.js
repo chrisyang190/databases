@@ -11,27 +11,20 @@ module.exports = {
         } else {
           
           console.log(rows);
+//will have access to rows once done querying; if callback is not called, will just query and will have no idea what to do with the data
           return callback(rows);
-          //will have access to rows once done querying; if callback is not called, will just query and will have no idea what to do with the data
         }
       });
 
       // db.end();
     }, // a function which produces all the messages
     post: function (data, callback) {
-      // var parsed = JSON.parse(jsonObj);
-      // {text: ... , username, roomname}
-      // console.log(parsed);
-      // db.connect();
-      // db.query('INSERT INTO message SET ?', obj, function(err, res) {
       console.log('data', data);
       var queryStr = 'INSERT INTO messages (text, user_id, roomname) VALUES ("' + data.text + '", (SELECT id FROM users WHERE username = "' + data.username + '" limit 1), "' + data.roomname + '");';
       db.query(queryStr, function(err, res) {
         if (err) {
           throw err;
         }
-       
-        // done();
         console.log('Last insert ID:', res.insertId);
         callback(res);
       });

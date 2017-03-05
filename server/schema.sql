@@ -63,9 +63,9 @@ CREATE TABLE messages (
 --     REFERENCES users (id)
 -- );
 
-INSERT INTO users (id, username) VALUES (1, 'John');
+INSERT INTO users (id, username) VALUES (1, 'Steve & Chris');
 -- insert into rooms (id, roomname) values (NULL, 'lobby');
-insert into messages (id, text, roomname, user_id) values (1, 'Hi there', 'lobby', 1);
+insert into messages (id, text, roomname, user_id) values (1, 'Welcome to the chat room!', 'lobby', 1);
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql

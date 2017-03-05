@@ -80,7 +80,7 @@ app.fetch = function() {
       newMessages = [];
       console.log('fetching');
       // REMEMBER TO PARSE THIS DATA, SINCE IT WAS STRINGIFIED FROM SERVER TO CLIENT!
-      (JSON.parse(data)).results.forEach(function(value) {
+      (JSON.parse(data)).forEach(function(value) {
         newMessages.push(value);
       });
       $('#chats').children('.message').remove();
@@ -90,7 +90,7 @@ app.fetch = function() {
         }
       });
 
-      (JSON.parse(data)).results.forEach(function(value) {
+      (JSON.parse(data)).forEach(function(value) {
         var roomname = _escape(value.roomname);
         if (app.rooms.indexOf(value.roomname) === -1) {
           app.rooms.push(value.roomname);
