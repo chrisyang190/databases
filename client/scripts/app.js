@@ -33,7 +33,7 @@ $(document).ready(function() {
   };
   app.init();
   app.fetch();
-  // setInterval(app.fetch.bind(app), 2000);
+  setInterval(app.fetch.bind(app), 2000);
 });
 
 app.send = function(message) {

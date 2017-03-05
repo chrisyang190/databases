@@ -29,20 +29,23 @@ module.exports = {
         // res.writeHead(27000, this.headers);
       models.messages.get(function(row) {
         console.log(row);
+        // remember.results.push(row[0]);
+        remember.results = row;
+        res.writeHead(200, headers);
+        res.end(JSON.stringify(remember));
       });
 
       //WHY IS CONTENTTYPE TEXT/HTML AND NOT APPLICATION/JSON
-      res.writeHead(200, headers);
-      res.end(JSON.stringify(remember));
+
+      /*res.writeHead(200, headers);
+      res.end(JSON.stringify(remember));*/
       // }
     }, // a function which handles a get request for all messages
     post: function (req, res) {
       // if (req.method === 'POST') {
         // res.writeHead(201, this.headers);
       console.log('posted 1');
-      req.on('data', function(data) {
-        console.log('WUT!');
-      });
+      
       // remember = remember || { results: [] };
       // req.on('data', function(data) {
       //   console.log('data', data);
@@ -52,16 +55,20 @@ module.exports = {
       // models.messages.post(parsed);
       console.log('request body', req.body);
 
-      models.users.post(req.body, function(data) {
-        console.log('WHY IS THIS NOT WORKING');
+      models.users.post(req.body, function(err, data) {
+        if (err) {}
+        models.messages.post(req.body, function(data) {
+          console.log('posted');
+          res.writeHead(201, headers);
+        // res.end(JSON.stringify(remember));
+        });
       });
 
       // var parsed = JSON.parse(req.body);
       // models.users.post(parsed);
 
-      res.writeHead(201, headers);
-      remember.results.push(req.body);
-      res.end(JSON.stringify(remember));
+      // res.writeHead(201, headers);
+      //   res.end(JSON.stringify(remember));
       // }
     } // a function which handles posting a message to the database
   },
@@ -77,31 +84,36 @@ module.exports = {
 
       models.users.get(function(row) {
         console.log(row);
+        res.writeHead(200, headers);
+        res.end(JSON.stringify(remember));
       });
 
-      res.writeHead(200, headers);
-      var bleh = models.users.get();
-      res.end(JSON.stringify(bleh));
+      // var bleh = models.users.get();
+      // res.end(JSON.stringify(bleh));
       // }
     },
     post: function (req, res) {
       // if (req.method === 'POST') {
         // res.writeHead(201, this.headers);
-      res.writeHead(201, headers);
-      console.log('posted');
+      // res.writeHead(201, headers);
+      // console.log('posted');
       // remember = remember || { results: [] };
       // req.on('data', function(data) {
       //   console.log('data', data);
       //   remember.results.push(JSON.parse(data));
       // });
-
+      models.users.post(req.body, function(data) {
+        console.log('posted');
+        res.writeHead(201, headers);
+        // res.end(JSON.stringify(remember));
+      });
       // var parsed = JSON.parse(req.body);
       // models.users.post(parsed);
 
       // models.users.post(req.body);
 
-      remember.results.push(req.body);
-      res.end(JSON.stringify(remember));
+      // remember.results.push(req.body);
+      // res.end(JSON.stringify(remember));
     }
     // }
   }

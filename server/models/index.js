@@ -4,7 +4,8 @@ module.exports = {
   messages: {
     get: function (callback) {
       // db.connect();
-      db.query('SELECT * FROM messages', function(err, rows) {
+      var queryStr = 'SELECT messages.text, users.username, messages.roomname from messages LEFT OUTER JOIN users ON users.id = messages.user_id;';
+      db.query(queryStr, function(err, rows) {
         if (err) {
           // dont do anything
         } else {
@@ -23,7 +24,9 @@ module.exports = {
       // console.log(parsed);
       // db.connect();
       // db.query('INSERT INTO message SET ?', obj, function(err, res) {
-      db.query('INSERT INTO messages (id, text, user_id, room_id) VALUES (' + data.message + ')', function(err, res) {
+      console.log('data', data);
+      var queryStr = 'INSERT INTO messages (text, user_id, roomname) VALUES ("' + data.text + '", (SELECT id FROM users WHERE username = "' + data.username + '" limit 1), "' + data.roomname + '");';
+      db.query(queryStr, function(err, res) {
         if (err) {
           throw err;
         }
@@ -57,12 +60,12 @@ module.exports = {
       // console.log(parsed);
       // db.connect();
       // db.query('INSERT INTO users SET ?', obj, function(err, res) {
-      db.query('INSERT INTO users (name) VALUES(' + data.username + ')', function(err, rows) {
+      db.query('INSERT INTO users (username) VALUES("' + data.username + '")', function(err, rows) {
         if (err) {
           throw err;
         }
      
-        console.log('Last insert ID:', res.insertId);
+       
         return callback(rows);
         // done();
       });

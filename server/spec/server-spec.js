@@ -20,8 +20,9 @@ describe('Persistent Node Chat Server', function() {
 
     /* Empty the db table before each test so that multiple tests
      * (or repeated runs of the tests) won't screw each other up: */
-
-    dbConnection.query('truncate ' + tablename, done);
+    done();
+    // dbConnection.query('truncate ' + tablename, done);
+    // dbConnection.query('truncate users', done);
   });
 
   afterEach(function() {
@@ -41,7 +42,7 @@ describe('Persistent Node Chat Server', function() {
         uri: 'http://127.0.0.1:3000/classes/messages',
         json: {
           username: 'Valjean',
-          message: 'In mercy\'s name, three days is all I need.',
+          text: 'In mercy\'s name, three days is all I need.',
           roomname: 'Hello'
         }
       }, function () {
@@ -67,7 +68,7 @@ describe('Persistent Node Chat Server', function() {
     });
   });
 
-  xit('Should output all messages from the DB', function(done) {
+  it('Should output all messages from the DB', function(done) {
     // Let's insert a message into the db
        var queryString = "SELECT * FROM messages";
        var queryArgs = [];
@@ -90,7 +91,7 @@ describe('Persistent Node Chat Server', function() {
     });
   });
 
-  it('Should output all users from the DB', function(done) {
+  xit('Should output all users from the DB', function(done) {
     // Let's insert a message into the db
        var queryString = "SELECT * FROM users";
        var queryArgs = [];
