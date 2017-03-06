@@ -19,7 +19,7 @@ module.exports = {
   // 'access-control-allow-headers': 'content-type, accept',
   // 'access-control-max-age': 10, // Seconds.
   // 'Content-Type': 'application/json' // lookback to see why this is text/html instead of applciation/JSON
-  // },
+  // }, //
   messages: {
 
     get: function (req, res) {

@@ -1,4 +1,4 @@
-var db = require('../db');
+var db = require('../db'); // 
 
 module.exports = {
   messages: {
@@ -7,9 +7,13 @@ module.exports = {
       var queryStr = 'SELECT messages.text, users.username, messages.roomname \
        from messages LEFT OUTER JOIN users ON (users.id = messages.user_id);';
       db.query(queryStr, function(err, rows) {
-        console.log(rows);
+        if (err) {
+          // dont do anything
+        } else {
+          console.log(rows);
 //will have access to rows once done querying; if callback is not called, will just query and will have no idea what to do with the data
-        callback(rows);
+          return callback(rows);
+        }
       });
 
       // db.end();
@@ -18,8 +22,11 @@ module.exports = {
       console.log('data', data);
       var queryStr = 'INSERT INTO messages (text, user_id, roomname) VALUES ("' + data.text + '", (SELECT id FROM users WHERE username = "' + data.username + '" limit 1), "' + data.roomname + '");';
       // var queryStr = 'INSERT INTO messages (text, user_id, roomname) VALUES (?, (select id from users where username = ? limit 1) , ?)';
-      db.query(queryStr, data, function(err, res) {
-        // console.log('Last insert ID:', res.insertId);
+      db.query(queryStr, function(err, res) {
+        if (err) {
+          throw err;
+        }
+        console.log('Last insert ID:', res.insertId);
         callback(res);
       });
       // db.end();
@@ -32,7 +39,12 @@ module.exports = {
       console.log('test');
       // db.connect();
       db.query('SELECT * FROM users', function(err, rows) {
-        callback(rows);
+        if (err) {
+          throw err;
+        } else {
+          console.log('WUT?');
+          return callback(rows);
+        }
       });
       // db.end();
     },
@@ -42,10 +54,13 @@ module.exports = {
       // console.log(parsed);
       // db.connect();
       // db.query('INSERT INTO users SET ?', obj, function(err, res) {
-      // var queryStr = 'INSERT INTO users (username) VALUES("' + data.username + '");';
-      var queryStr = "insert into users (username) values(?);";
-      db.query(queryStr, data, function(err, rows) {
-        callback(rows);
+      db.query('INSERT INTO users (username) VALUES("' + data.username + '")', function(err, rows) {
+        if (err) {
+          throw err;
+        }
+     
+       
+        return callback(rows);
         // done();
       });
       // db.end();
