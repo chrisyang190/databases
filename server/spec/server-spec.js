@@ -61,7 +61,7 @@ describe('Persistent Node Chat Server', function() {
 
           // TODO: If you don't have a column named text, change this test.
           expect(results[0].text).to.equal('In mercy\'s name, three days is all I need.');
-
+          
           done();
         });
       });
